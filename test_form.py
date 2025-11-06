@@ -1,3 +1,4 @@
+import allure
 import pytest
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
@@ -17,44 +18,48 @@ def driver():
     yield driver
     driver.quit()
 
-# Тест с верными данными
+@allure.epic("Авторизация")
+@allure.title("Тест с верными данными")
+@allure.description("Авторизация с вводом верных данных")
 def test_successful_login(driver):
-    # Переходим на страницу
-    driver.get("https://the-internet.herokuapp.com/login")
+    with allure.step("Переходим на страницу"):
+        driver.get("https://the-internet.herokuapp.com/login")
 
-    # Находим элементы
-    username_field = driver.find_element(By.ID, "username")
-    password_field = driver.find_element(By.ID, "password")
-    login_button = driver.find_element(By.CSS_SELECTOR, ".fa.fa-2x.fa-sign-in")
+    with allure.step("Находим элементы"):
+        username_field = driver.find_element(By.ID, "username")
+        password_field = driver.find_element(By.ID, "password")
+        login_button = driver.find_element(By.CSS_SELECTOR, ".fa.fa-2x.fa-sign-in")
 
-    # Вводим данные
-    username_field.send_keys("tomsmith")
-    password_field.send_keys("SuperSecretPassword!")
+    with allure.step("Вводим данные"):
+        username_field.send_keys("tomsmith")
+        password_field.send_keys("SuperSecretPassword!")
 
-    # Нажимаем кнопку 'Login'
-    login_button.click()
+    with allure.step("Нажимаем кнопку 'Login'"):
+        login_button.click()
 
-    # Проверяем, что появилось сообщение об успешном входе
-    success_message = driver.find_element(By.CLASS_NAME, "flash.success").text
-    assert "You logged into a secure area!" in success_message
+    with allure.step("Проверяем, что появилось сообщение об успешном входе"):
+        success_message = driver.find_element(By.CLASS_NAME, "flash.success").text
+        assert "You logged into a secure area!" in success_message
 
-# Тест с неверными данными
+@allure.epic("Авторизация")
+@allure.title("Тест с неверными данными")
+@allure.description("Авторизация с вводом неверных данных")
 def test_unsuccessful_login(driver):
-    # Переходим на страницу
-    driver.get("https://the-internet.herokuapp.com/login")
+    with allure.step("Переходим на страницу"):
+        driver.get("https://the-internet.herokuapp.com/login")
 
-    # Находим элементы
-    username_field = driver.find_element(By.ID, "username")
-    password_field = driver.find_element(By.ID, "password")
-    login_button = driver.find_element(By.CSS_SELECTOR, ".fa.fa-2x.fa-sign-in")
+    with allure.step("Находим элементы"):
+        username_field = driver.find_element(By.ID, "username")
+        password_field = driver.find_element(By.ID, "password")
+        login_button = driver.find_element(By.CSS_SELECTOR, ".fa.fa-2x.fa-sign-in")
 
-    # Вводим неправильные данные
-    username_field.send_keys("any_user")
-    password_field.send_keys("any_password")
+    with allure.step("Вводим неправильные данные"):
+        username_field.send_keys("any_user")
+        password_field.send_keys("any_password")
 
-    # Отправляем форму
-    login_button.click()
+    with allure.step("Отправляем форму"):
+        login_button.click()
 
-    # Проверяем, что появилось сообщение об ошибке
-    error_message = driver.find_element(By.CLASS_NAME, "flash.error").text
-    assert "Your username is invalid!" in error_message
+    with allure.step("Проверяем, что появилось сообщение об ошибке"):
+        error_message = driver.find_element(By.CLASS_NAME, "flash.error").text
+        assert "Your username is invalid!" in error_message
