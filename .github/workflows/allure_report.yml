@@ -1,4 +1,5 @@
 name: Run tests with Allure
+
 on:
   push:
     branches: [main]
