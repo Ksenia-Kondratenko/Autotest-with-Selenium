@@ -34,7 +34,7 @@ def test_successful_login(driver):
         username_field.send_keys("tomsmith")
         password_field.send_keys("SuperSecretPassword!")
 
-    with allure.step("Нажимаем кнопку 'Login'"):
+    with allure.step("Отправляем форму"):
         login_button.click()
 
     with allure.step("Проверяем, что появилось сообщение об успешном входе"):
@@ -53,7 +53,7 @@ def test_unsuccessful_login(driver):
         password_field = driver.find_element(By.ID, "password")
         login_button = driver.find_element(By.CSS_SELECTOR, ".fa.fa-2x.fa-sign-in")
 
-    with allure.step("Вводим неправильные данные"):
+    with allure.step("Вводим неверные данные"):
         username_field.send_keys("any_user")
         password_field.send_keys("any_password")
 
