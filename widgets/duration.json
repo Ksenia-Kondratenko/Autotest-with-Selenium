@@ -1,0 +1,1 @@
+[{"uid":"425801fc3f60b07f","name":"Тест с неверными данными","time":{"start":1762505954402,"stop":1762505955008,"duration":606},"status":"passed","severity":"normal"},{"uid":"980868205b2f1909","name":"Тест с верными данными","time":{"start":1762505951787,"stop":1762505954084,"duration":2297},"status":"passed","severity":"normal"}]
